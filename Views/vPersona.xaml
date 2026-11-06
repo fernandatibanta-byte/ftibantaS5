@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ftibantaS5.Views.vPersona"
+             Title="vPersona">
+
+    <VerticalStackLayout Padding="15"
+                         Spacing="15">
+
+        <Label Text="Semana 5: BASE DE DATOS LOCALES"
+               FontSize="20"
+               HorizontalOptions="Center"
+               VerticalOptions="Center" />
+
+        <Entry x:Name="txtName"
+               Placeholder="Ingresa el Nombre" />
+
+        <Grid RowSpacing="5"
+              ColumnSpacing="5">
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <Button x:Name="btnAgregar"
+                    Text="Agregar Persona"
+                    Clicked="btnAgregar_Clicked"
+                    Grid.Row="0"
+                    Grid.Column="0" />
+
+            <Label x:Name="lblStatusMessage"
+                   TextColor="Red"
+                   Grid.Row="1"
+                   Grid.Column="0"
+                   Grid.ColumnSpan="2" />
+
+            <Button x:Name="btnMostar"
+                    Text="Mostrar Personas"
+                    Clicked="btnMostar_Clicked"
+                    Grid.Row="2"
+                    Grid.Column="0" />
+
+            <Button x:Name="btnEliminar"
+                    Text="Eliminar Persona"
+                    Clicked="btnEliminar_Clicked"
+                    IsEnabled="False"
+                    BackgroundColor="DarkRed"
+                    TextColor="White"
+                    Grid.Row="2"
+                    Grid.Column="1" />
+
+            <CollectionView x:Name="listaPersonas"
+                            SelectionMode="Single"
+                            SelectionChanged="listaPersonas_SelectionChanged"
+                            Grid.Row="3"
+                            Grid.Column="0"
+                            Grid.ColumnSpan="2">
+
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+
+                        <Grid Padding="5">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Label Text="{Binding Id}"
+                                   Grid.Column="0"/>
+
+                            <Label Text="{Binding Name}"
+                                   Grid.Column="1"
+                                   Margin="10,0,0,0"/>
+                        </Grid>
+
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+
+            </CollectionView>
+
+        </Grid>
+
+    </VerticalStackLayout>
+
+</ContentPage>
