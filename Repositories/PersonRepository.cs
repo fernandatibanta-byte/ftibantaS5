@@ -84,5 +84,29 @@ namespace ftibantaS5.Repositories
             }
         }
 
+        // Metodo para actualizar una persona de la base de datos Update
+        public void UpdatePerson(int id, string name)
+        {
+            int result = 0;
+            try
+            {
+                Init();
+                if (id <= 0)
+                    throw new Exception("Seleccione un registro valido");
+                if (string.IsNullOrEmpty(name))
+                    throw new Exception("El nombre es requerido");
+                Persona persona = new () { Id = id, Name = name };
+                result = _conn.Update(persona);
+                if (result == 0)
+                    throw new Exception("No se encontro el registro");
+                StatusMessage = string.Format("Dato actualizado");
+
+            }
+            catch (Exception ex)
+            {
+                StatusMessage = string.Format("Error:" + ex.Message);
+            }
+        }
+
     }
 }

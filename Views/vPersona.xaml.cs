@@ -20,6 +20,20 @@ public partial class vPersona : ContentPage
         lblStatusMessage.Text = "";
         App._personRepo.AddNewPerson(txtName.Text);
         lblStatusMessage.Text = App._personRepo.StatusMessage;
+
+        CargarPersonas();
+    }
+
+    private void btnActualizar_Clicked(object sender, EventArgs e)
+    {
+        if (personaSeleccionada is null)
+            return;
+
+        lblStatusMessage.Text = "";
+        App._personRepo.UpdatePerson(personaSeleccionada.Id, txtName.Text);
+        lblStatusMessage.Text = App._personRepo.StatusMessage;
+
+        CargarPersonas();
     }
 
     // Se ejecuta cuando el usuario selecciona un registro de la lista
@@ -27,6 +41,11 @@ public partial class vPersona : ContentPage
     {
         personaSeleccionada = e.CurrentSelection.FirstOrDefault() as Models.Persona;
         btnEliminar.IsEnabled = personaSeleccionada is not null;
+        btnActualizar.IsEnabled = personaSeleccionada is not null;
+
+        // Carga el nombre seleccionado en el Entry para poder editarlo
+        if (personaSeleccionada is not null)
+            txtName.Text = personaSeleccionada.Name;
     }
 
     private async void btnEliminar_Clicked(object sender, EventArgs e)
@@ -55,5 +74,7 @@ public partial class vPersona : ContentPage
         listaPersonas.SelectedItem = null;
         personaSeleccionada = null;
         btnEliminar.IsEnabled = false;
+        btnActualizar.IsEnabled = false;
+        txtName.Text = "";
     }
 }
